@@ -15,30 +15,7 @@
         </div>
          <div class="table">
              <div class='search' ref="search">
-               <div class="title">查询条件</div>
-               <div class="range">
-                   <div class="range_index">
-                       <span>行政区划：</span>
-                        <el-select v-model="option" placeholder="请选择" size="small">
-                            <el-option
-                            v-for="item in selectOption"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.val"
-                            >
-                            </el-option>
-                        </el-select>                       
-                   </div>
-                   <el-input placeholder="请输入内容" size="small"></el-input>
-                   <searchModule :search="searchContent" />
-                   <!-- <el-button type="primary" @click="search">查询</el-button> -->
-               </div>
                <div class="table_title">{{label}}</div>
-               <div class="group">
-                  <div class="" style="font-size:16px;margin-left:10px;">请选择：</div>
-                  <el-radio v-model="radio" label="" >不分组</el-radio> 
-                  <el-radio v-model="radio" label="" >区域</el-radio>
-               </div>
              </div>
              <div class="show" ref="show" >
                <div class="columns">
@@ -80,7 +57,7 @@
 import Vue from 'vue'
 import searchModule from './searchModule.vue'
 import dmap from '@istrong/dmap'
-import {Table,TableColumn, Dialog, Select, Option, Button, Radio, Row, Col,Input} from 'element-ui'
+import {Table,TableColumn, Dialog, Select, Option, Button, Radio, Row, Col} from 'element-ui'
 Vue.use(dmap)
 Vue.use(Table)
 Vue.use(TableColumn)
@@ -91,7 +68,6 @@ Vue.use(Button)
 Vue.use(Radio)
 Vue.use(Row)
 Vue.use(Col)
-Vue.use(Input)
 export default {
     name: 'mainPage',
     components: { searchModule },
@@ -182,7 +158,6 @@ export default {
      },
      watch: {
          testData: function() {
-            //  console.log('change')
              this.init()
          }
      },
@@ -326,37 +301,14 @@ export default {
          flex-direction: column;
          overflow: auto;
          .search{
-             .title{
-                 height:40px;
-                 line-height: 40px;
-                 color:#fff;
-                 background-color:rgb(16, 109, 195);
-                 padding-left:10px;
-             }
-             .range{
-               padding:10px;
-               color:#000;
-               .range_index{
-                   display:flex;
-                   align-items: center;
-                   span{
-                       font-size:14px;
-                   }
-               }
-             }
             .table_title{
                  background-color: #f3f6f9;
                  height:40px;
                  line-height:40px;
                  padding-left:10px;
-                 font-size:16px;
+                 font-size:18px;
+                 color:rgb(66,66,66);
             }
-            .group{
-                height:30px;
-                display:flex;
-                align-items: center;
-            }
-
          }
          .show{
             flex:1;

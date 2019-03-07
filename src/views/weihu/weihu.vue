@@ -1,7 +1,7 @@
 <template>
   <div class="weihu">
     <div class="nav">
-        <suber />
+        <suber @change="changeComponent" />
     </div>
     <div class="content">
       <keep-alive>
@@ -14,6 +14,7 @@
 <script>
 import suber from '@/components/sub/subLine.vue'
 const shuiku = () => import ('./components/shuiku.vue')
+const shuiza = () => import ('./components/shuiza.vue')
 export default {
   name: 'weihu',
   data () {
@@ -29,7 +30,18 @@ export default {
 
   mounted () {},
 
-  methods: {}
+  methods: {
+    changeComponent (type) {
+       switch (type) {
+         case 'shuiku':
+         this.component = shuiku
+         break
+         case 'shuiza':
+         this.component = shuiza
+         break
+       }
+    }
+  }
 
 }
 

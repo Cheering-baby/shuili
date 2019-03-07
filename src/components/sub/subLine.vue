@@ -26,8 +26,8 @@
             <i class="el-icon-tickets"></i>
             <span>工情信息</span>
           </template>
-            <el-menu-item index="3-1">水库信息</el-menu-item>
-            <el-menu-item index="3-2">水闸信息</el-menu-item>
+            <el-menu-item index="3-1" @click="changeItem('shuiku')">水库信息</el-menu-item>
+            <el-menu-item index="3-2" @click="changeItem('shuiza')">水闸信息</el-menu-item>
         </el-submenu>        
         <el-submenu index="4">
           <template slot="title">
@@ -63,7 +63,11 @@ export default {
 
   mounted () {},
 
-  methods: {}
+  methods: {
+    changeItem (type) {
+       this.$emit('change', type)
+    }
+  }
 
 }
 

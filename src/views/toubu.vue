@@ -1,7 +1,7 @@
 <template>
   <div class="toubu">
      <div class="time">{{date}}</div>
-     <div class="title">水利防汛信息展示平台</div>
+     <div class="title">水利防汛信息化平台</div>
      <div class="nav">
        <div class="nav1" @click="zonghe(1)">
          <div class="img" style="background:url(/public/img/zhuye.png) no-repeat;background-size:100% 100%;"></div>

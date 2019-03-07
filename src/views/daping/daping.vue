@@ -7,12 +7,14 @@
           <jizhi />
           <yuliang />
       </div>
+      <div class="center">
+        <typhoon />
+      </div>
       <div class="right">
         <tide />
         <popup />
         <popup title="雷达云图" />
       </div>
-      <div class="center">132</div>
   </div>
 </template>
 
@@ -21,6 +23,7 @@ import jizhi from './jizhi.vue'
 import yuliang from './yuliang.vue'
 import tide from './tide.vue'
 import popup from '@/components/popup/popup.vue'
+import typhoon from './typhoon.vue'
 export default {
   name: 'daping',
   data () {
@@ -33,7 +36,8 @@ export default {
       jizhi,
       yuliang,
       tide,
-      popup
+      popup,
+      typhoon
   },
 
 
@@ -46,21 +50,18 @@ export default {
 </script>
 <style lang='scss' scoped>
 .daping{
-    // display:flex;
-    // justify-content: space-between;
+    display:flex;
+    justify-content: space-between;
     width:100%;
     height:100%;
     .left{
-      float:left;
       width:500px;
     }
     .right{
       width:400px;
-      float:right;
     }
     .center{
-      margin-left:500px;
-      margin-right:400px;
+      flex-grow: 1;
     }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="dengru">
        <div class="center">
-         <div class="title">水利防汛信息展示平台</div>
+         <div class="title">水利防汛信息化平台</div>
          <div class="zhanghao">
            <div class="text">账号</div>
            <el-input v-model="zhanghao" placeholder="请输入账号" suffix-icon="el-icon-tickets"></el-input>
@@ -34,7 +34,12 @@ export default {
   components: {},
 
 
-  mounted () {},
+  mounted () {
+    // this.$Axios.get('http://localhost:3000/data')
+    //   .then((res) => {
+    //     console.log(res)
+    //   } )
+  },
 
   methods: {
     dengru () {

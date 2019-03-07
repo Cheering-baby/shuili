@@ -15,7 +15,7 @@ module.exports = {
   // webpack-dev-server 相关配置
   devServer: {
     open: true,
-    //proxy: 'http://47.95.14.230:9208', // 设置代理
+    proxy: 'http://localhost:3000/', // 设置代理
     overlay: {
       warnings: true,
       errors: true

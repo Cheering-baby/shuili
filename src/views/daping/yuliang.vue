@@ -49,7 +49,7 @@ export default {
         backgroundColor: "#f3f6f9",
         height:'20px'
       }
-    };
+    }
   },
 
   components: {
