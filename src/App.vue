@@ -13,6 +13,11 @@ export default {
   name: 'app',
   components: {
     toubu
+  },
+  props:{
+    height:{
+      type: Number
+    }
   }
 }
 </script>
@@ -26,12 +31,16 @@ html,body{
    width:100%;
    height:100%;
    position:relative;
+  //  display:flex;
+  //  flex-direction: column;
    .container{
      width:100%;
      position:absolute;
      top:60px;
+     right:0;
      left:0;
      bottom:0;
+    //  flex-grow:1;
    }
 }
 

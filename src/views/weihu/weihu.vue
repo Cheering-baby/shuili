@@ -15,6 +15,10 @@
 import suber from '@/components/sub/subLine.vue'
 const shuiku = () => import ('./components/shuiku.vue')
 const shuiza = () => import ('./components/shuiza.vue')
+const bizhaidian = () => import ('./components/bizhaidian.vue')
+const fxwz = () => import ('./components/fxwz.vue')
+const wf = () => import ('./components/wf.vue')
+const dwd = () => import ('./components/dwd.vue')
 export default {
   name: 'weihu',
   data () {
@@ -32,14 +36,17 @@ export default {
 
   methods: {
     changeComponent (type) {
-       switch (type) {
-         case 'shuiku':
-         this.component = shuiku
-         break
-         case 'shuiza':
-         this.component = shuiza
-         break
-       }
+      const item = [
+        {name: 'shuiku', component: shuiku},
+        {name: 'shuiza', component: shuiza},
+        {name: 'bizhaidian', component: bizhaidian},
+        {name: 'fxwz', component: fxwz},
+        {name: 'wf', component: wf},
+        {name: 'dwd', component: dwd},
+      ]
+      let now = item.filter(f => f.name === type)
+      this.component = now[0].component
+      // console.log(now)
     }
   }
 

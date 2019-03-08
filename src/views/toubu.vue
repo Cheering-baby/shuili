@@ -58,6 +58,7 @@ export default {
 </script>
 <style lang='scss' scoped>
 .toubu{
+    // width:100%;
     height:60px;
     background-color: rgb(31, 144, 242);
     display:flex;

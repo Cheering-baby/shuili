@@ -1,12 +1,12 @@
 <template>
-  <div class="shuiza" ref="shuiza">
+  <div class="bizhaidian" ref="bizhaidian">
     <!-- <el-table :data="tableData" stripe style="width: 100%" border :header-cell-style="headerStyle" :height="height">
       <el-table-column prop="ennm" label="站名" width="140"></el-table-column>
       <el-table-column prop="name" label="水位" width="80"></el-table-column>
       <el-table-column prop="name" label="警戒线" width="100"></el-table-column>
       <el-table-column prop="address" label="时间"></el-table-column>
     </el-table> -->
-    <iframe scrolling="no" src="http://192.168.118.226:9831/CommonReport/TableList.aspx?TableDBID=10423&PowerSetStr=Add,Update,Del,Sort,Em,Im" frameborder="0" width="100%" :height="height" allowtransparency="true" color="000000"></iframe>
+    <iframe scrolling="no" src="http://192.168.118.226:9831/CommonReport/TableList.aspx?TableDBID=10267&PowerSetStr=Add,Update,Del,Sort,Em,Im" frameborder="0" width="100%" :height="height" allowtransparency="true" color="000000"></iframe>
   </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
 
 </script>
 <style lang='scss' scoped>
-.shuiza{
+.bizhaidian{
   height:100%;
 }
 </style>

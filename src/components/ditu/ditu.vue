@@ -164,8 +164,8 @@ export default {
     mounted() {
         this.getData()
         this.tableHeight.height = this.winH - this.$refs.search.offsetHeight - 45 +'px'
-        this.$store.commit('increment')
-        console.log(this.$store.state.count)
+        // this.$store.commit('increment')
+        // console.log(this.$store.state.count)
     },
     methods:{
         getData() {

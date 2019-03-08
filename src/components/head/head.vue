@@ -39,7 +39,7 @@ export default {
 </script>
 <style lang='scss' scoped>
   .head{
-      width:100%;
+      width:90%;
       border-left:solid 8px rgb(31, 156, 255);
       padding-left: 10px;
   }

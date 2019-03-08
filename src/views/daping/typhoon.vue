@@ -1,18 +1,24 @@
 <template>
   <div class="typhoon">
-    <div style="height:100%;">
       <div class="top">
         <div class="title">{{title}}</div>
         <div class="fangda" @click="change('fangda')"></div>
       </div>
-      <dmap @init="init" :center="[120,20]" :zoom="4.8" provider="GaodeMap.Normal"/>
-    </div>
+      <div class="map" :style="{height:height + 'px'}">
+       <dmap @init="init" :center="[120,20]" :zoom="4.8" provider="GaodeMap.Normal" /> 
+      </div>
     <transition name="fade">
       <div class="typhoonBig" v-if="showBig">
             <div class="title_big">
                 <div class="title">{{title}}</div>
                 <div class="suoxiao" @click="change('suoxiao')"></div>                
-            </div>        
+            </div>
+            <div class="content">
+              <div class="map">
+                 <bigMap />
+              </div>
+              <div class="chart"></div>
+            </div>       
       </div>
     </transition>
   </div>
@@ -21,28 +27,32 @@
 <script>
 import Vue from "vue";
 import dmap from "@istrong/dmap";
+import bigMap from './dmap.vue'
 Vue.use(dmap);
 export default {
   name: "typhoon",
-  props: {
-    height:{
-      type: Number,
-      default: function() {
-        let now = document.documentElement.clientHeight || document.body.clientHeight
-        return now - 65
-      }
-    }
-  },
   data() {
     return {
-        title: '台风',
-        showBig: false
-    };
+        winH: document.documentElement.clientHeight || document.body.clientHeight,
+        title: '台风专题',
+        showBig: false,
+        height: 0
+    }
   },
 
-  components: {},
-
-  mounted() {},
+  components: {
+    bigMap
+  },
+  created () {
+    // let now = document.documentElement.clientHeight || document.body.clientHeight
+    this.height = this.winH - 95
+  },
+  mounted() {
+    window.onresize = () => {
+      // let now = document.documentElement.clientHeight || document.body.clientHeight
+      this.height = this.winH - 95
+    }
+  },
 
   methods: {
     init(map) {
@@ -70,7 +80,6 @@ export default {
 </script>
 <style lang='scss' scoped>
 .typhoon {
-  width: 100%;
   height: 100%;
   .top {
     height: 30px;
@@ -100,6 +109,8 @@ export default {
     background: #99a9bf;
     z-index:2019;
     color:#fff;
+    display:flex;
+    flex-direction: column;
     .title_big{
         display:flex;
         justify-content: space-between;
@@ -116,6 +127,19 @@ export default {
             background-size:60% 60%;
             cursor:pointer;
         }
+    }
+    .content{
+     flex-grow:1;
+     display:flex;
+     .map{
+       flex-grow:1;
+       background-color:rgb(150,150,150);
+     }
+     .chart{
+       width:450px;
+       height:100%;
+       background-color:rgb(31, 156, 255);
+     }
     }
   }
 }

@@ -8,10 +8,10 @@
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-view"></i>
-            <span>监测信息</span>
+            <span>风险信息</span>
           </template>
-            <el-menu-item index="1-1">实时水情</el-menu-item>
-            <el-menu-item index="1-2">实时雨情</el-menu-item>
+            <el-menu-item index="1-1" @click="changeItem('dwd')">低洼地</el-menu-item>
+            <el-menu-item index="1-2" @click="changeItem('wf')">危房</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">
@@ -34,8 +34,8 @@
             <i class="el-icon-bell"></i>
             <span>应急抢险</span>
           </template>
-            <el-menu-item index="4-1">防汛物资</el-menu-item>
-            <el-menu-item index="4-2">避灾点</el-menu-item>
+            <el-menu-item index="4-1" @click="changeItem('fxwz')">防汛物资</el-menu-item>
+            <el-menu-item index="4-2" @click="changeItem('bizhaidian')">避灾点</el-menu-item>
         </el-submenu>
       </el-menu>
   </div>
