@@ -1,7 +1,7 @@
 <template>
   <div class="zonghe">
     <div class="nav">
-        <suber />
+        <suber @change="changeComponent" />
     </div>
     <div class="content">
       <keep-alive>
@@ -17,6 +17,7 @@ import ditu from '@/components/ditu/ditu.vue'
 import suber from '@/components/sub/subLine.vue'
 
 const shuiku = () => import ('./components/shuiku.vue')
+const shuiza = () => import ('./components/shuiza.vue')
 export default {
   name: 'zonghe',
   data () {
@@ -31,9 +32,21 @@ export default {
   },
 
 
-  mounted () {},
+  mounted () {
 
-  methods: {}
+  },
+
+  methods: {
+    changeComponent (type) {
+      const item = [
+        {name: 'shuiku', component: shuiku},
+        {name: 'shuiza', component: shuiza}
+      ]
+      let now = item.filter(f => f.name === type)
+      this.component = now[0].component
+      // console.log(now)
+    }
+  }
 
 }
 

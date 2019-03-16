@@ -16,10 +16,10 @@
         <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-location"></i>
-            <span>气象信息</span>
+            <span>基础信息</span>
           </template>
-            <el-menu-item index="2-1">天气预报</el-menu-item>
-            <el-menu-item index="2-2">降雨预报</el-menu-item>
+            <el-menu-item index="2-1" @click="changeItem('xzqh')">行政区划</el-menu-item>
+            <el-menu-item index="2-2" @click="changeItem('sxxx')">水系信息</el-menu-item>
         </el-submenu>        
         <el-submenu index="3">
           <template slot="title">
@@ -34,7 +34,7 @@
             <i class="el-icon-bell"></i>
             <span>应急抢险</span>
           </template>
-            <el-menu-item index="4-1" @click="changeItem('fxwz')">防汛物资</el-menu-item>
+            <el-menu-item index="4-1" @click="changeItem('bhdx')">重要保护对象</el-menu-item>
             <el-menu-item index="4-2" @click="changeItem('bizhaidian')">避灾点</el-menu-item>
         </el-submenu>
       </el-menu>

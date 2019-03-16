@@ -34,8 +34,8 @@
         <el-dialog :title="title" :visible.sync="dialogTableVisible" :modal="false">
         <div class="table_two">
             <div class="table_label">{{form.label}}</div>
-            <el-row style="border-left: 1px solid rgb(235,238,245);border-bottom:1px solid rgb(235,238,245);">
-                <el-col :span="12" v-for="item in form.columns" :key="item.text" style="border-top: 1px solid rgb(235,238,245);" class="col">
+            <el-row style="border-left: 1px solid rgb(235,238,245);border-top:1px solid rgb(235,238,245);">
+                <el-col :span="12" v-for="item in form.columns" :key="item.text" style="border-bottom: 1px solid rgb(235,238,245);" class="col">
                     <div class="grid-content bg-purple form_content" >
                         <div class="info">{{item.text}}</div>
                         <div class="data">{{formData[item.field]}}</div>
@@ -108,7 +108,7 @@ export default {
           }
       },
       label: String,
-      searchContent: Array,
+    //   searchContent: Array,
       iconUrl: {
           type: String,
           default: 'public/img/shuiku.png'
@@ -219,14 +219,14 @@ export default {
             // let lat = row.lat
             // let lon = row.lon
             let url = this.chart['providerUrl'].replace(/(\s*$)/g,"")
-            let ennmcd = row['ennmcd'].replace(/(\s*$)/g,"")
+            let stcd = row['stcd'].replace(/(\s*$)/g,"")
             
             
             this.title = row[this.chart['nameField']]
             this.$Axios
               .get(url,{
                params:{
-                   ennmcd: ennmcd
+                   stcd: stcd
                }
               })
               .then(d => {

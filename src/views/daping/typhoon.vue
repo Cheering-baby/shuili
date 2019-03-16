@@ -1,24 +1,31 @@
 <template>
   <div class="typhoon">
-      <div class="top">
-        <div class="title">{{title}}</div>
-        <div class="fangda" @click="change('fangda')"></div>
-      </div>
-      <div class="map" :style="{height:height + 'px'}">
-       <dmap @init="init" :center="[120,20]" :zoom="4.8" provider="GaodeMap.Normal" /> 
-      </div>
+    <div class="top">
+      <div class="title">{{title}}</div>
+      <div class="fangda" @click="change('fangda')"></div>
+    </div>
+    <div class="map" :style="{height:height + 'px'}">
+      <dmap @init="init" :center="[120,20]" :zoom="4.8" provider="GaodeMap.Normal"/>
+    </div>
     <transition name="fade">
       <div class="typhoonBig" v-if="showBig">
-            <div class="title_big">
-                <div class="title">{{title}}</div>
-                <div class="suoxiao" @click="change('suoxiao')"></div>                
-            </div>
-            <div class="content">
-              <div class="map">
-                 <bigMap />
+        <div class="title_big">
+          <div class="title">{{title}}</div>
+          <div class="suoxiao" @click="change('suoxiao')"></div>
+        </div>
+        <div class="content">
+          <div class="map">
+            <bigMap/>
+          </div>
+          <div class="chart" ref="chart">
+            <history/>
+            <div class="bottom" ref="bottom">
+              <div class="item" v-for="item in itemContent" :key="item.title">
+                <item :itemHeight="itemHeight" :item="item"/>
               </div>
-              <div class="chart"></div>
-            </div>       
+            </div>
+          </div>
+        </div>
       </div>
     </transition>
   </div>
@@ -27,33 +34,52 @@
 <script>
 import Vue from "vue";
 import dmap from "@istrong/dmap";
-import bigMap from './dmap.vue'
+import bigMap from "./dmap.vue";
+import history from "./components/history.vue";
+import item from "./components/analysis.vue";
 Vue.use(dmap);
 export default {
   name: "typhoon",
   data() {
     return {
-        winH: document.documentElement.clientHeight || document.body.clientHeight,
-        title: '台风专题',
-        showBig: false,
-        height: 0
-    }
+      winH: document.documentElement.clientHeight || document.body.clientHeight,
+      title: "台风专题",
+      showBig: false,
+      height: 0,
+      itemHeight: 0,
+      itemContent: [
+        { title: "气压分析", columns: ["hour", "windpower"], data: [] },
+        { title: "风力分析", columns: ["hour", "windspeed"], data: [] },
+        { title: "移速分析", columns: ["hour", "movingspeed"], data: [] }
+      ],
+      data: []
+    };
   },
 
   components: {
-    bigMap
+    bigMap,
+    history,
+    item
   },
-  created () {
+  created() {
     // let now = document.documentElement.clientHeight || document.body.clientHeight
-    this.height = this.winH - 95
+    this.height = this.winH - 95;
   },
   mounted() {
     window.onresize = () => {
       // let now = document.documentElement.clientHeight || document.body.clientHeight
-      this.height = this.winH - 95
+      this.height = this.winH - 95;
+    };
+  },
+  watch: {
+    showBig: function(val) {
+      setTimeout(() => {
+        if(val === 'true'){
+          this.itemHeight = Math.floor(this.$refs['bottom'].offsetHeight / 3);
+        }
+      },0)
     }
   },
-
   methods: {
     init(map) {
       this.$Axios
@@ -73,7 +99,7 @@ export default {
       if (type === "suoxiao") {
         this.showBig = false;
       }
-      console.log('done')
+      console.log("done");
     }
   }
 };
@@ -100,50 +126,62 @@ export default {
       cursor: pointer;
     }
   }
-  .typhoonBig{
-    width:100%;
-    position:fixed;
-    top:60px;
-    left:0;
-    bottom:0;
+  .typhoonBig {
+    width: 100%;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
     background: #99a9bf;
-    z-index:2019;
-    color:#fff;
-    display:flex;
+    z-index: 2019;
+    color: #fff;
+    display: flex;
     flex-direction: column;
-    .title_big{
-        display:flex;
-        justify-content: space-between;
-        align-items:center;
-        border-left:solid 8px rgb(31, 156, 255);
-        padding-left: 10px; 
-        .title{
-            font-size:20px;
-        }
-        .suoxiao{
-            width:32px;
-            height:30px;
-            background:url(/public/img/suoxiao.png) top 8px left 0px no-repeat;
-            background-size:60% 60%;
-            cursor:pointer;
-        }
+    .title_big {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: solid 8px rgb(31, 156, 255);
+      padding-left: 10px;
+      .title {
+        font-size: 20px;
+      }
+      .suoxiao {
+        width: 32px;
+        height: 30px;
+        background: url(/public/img/suoxiao.png) top 8px left 0px no-repeat;
+        background-size: 60% 60%;
+        cursor: pointer;
+      }
     }
-    .content{
-     flex-grow:1;
-     display:flex;
-     .map{
-       flex-grow:1;
-       background-color:rgb(150,150,150);
-     }
-     .chart{
-       width:450px;
-       height:100%;
-       background-color:rgb(31, 156, 255);
-     }
+    .content {
+      flex-grow: 1;
+      display: flex;
+      .map {
+        flex-grow: 1;
+        background-color: rgb(150, 150, 150);
+      }
+      .chart {
+        width: 450px;
+        height: 100%;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        .bottom {
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          color: #000;
+          .item {
+            flex-grow: 1;
+          }
+        }
+      }
     }
   }
 }
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 1s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
