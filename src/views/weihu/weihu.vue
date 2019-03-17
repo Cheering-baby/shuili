@@ -19,7 +19,7 @@ const bizhaidian = () => import ('./components/bizhaidian.vue')
 const bhdx = () => import ('./components/bhdx.vue')
 const wf = () => import ('./components/wf.vue')
 const dwd = () => import ('./components/dwd.vue')
-const xzqh = () => import ('./components/xzqh.vue')
+const cwz = () => import ('./components/cwz.vue')
 const sxxx = () => import ('./components/sxxx.vue')
 export default {
   name: 'weihu',
@@ -45,7 +45,7 @@ export default {
         {name: 'bhdx', component: bhdx},
         {name: 'wf', component: wf},
         {name: 'dwd', component: dwd},
-        {name: 'xzqh', component: xzqh},
+        {name: 'cwz', component: cwz},
         {name: 'sxxx', component: sxxx},
       ]
       let now = item.filter(f => f.name === type)

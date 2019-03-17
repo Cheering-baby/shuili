@@ -13,10 +13,6 @@ export default {
     data() {
         return {
            label: '水闸',
-        //     search: [
-        //     { text: '避风港', type: 'input', field: 'havennm', width: 180 },
-        //     { text: '区划', type: 'tree_select', field: 'addvcd', id: 'val', pid: 'pid', name: 'label', width: 180, height: 200, checkable: false, url: '/api/v2/basic/data?key=s_area_by_material' }
-        //    ],
            columns:[
                 { label: "序号", field: 'rowid', style: { textAlign: 'center', width: '40px' } },
                 { label: "水闸名称", field: 'stnm', style: { textAlign: 'center', width: '150px' } },
@@ -25,11 +21,11 @@ export default {
            testData:[], 
            chart:{
                width:'600px',
-               nameField: 'ennm',
+               nameField: 'stnm',
                providerUrl: 'http://192.168.118.226:9831/webapi/api/v2/basic/data?key=s_slcmin_response'
            },
             form: {
-                label: '水库基础信息', 
+                label: '基础信息', 
                 columns: [
                     { text: '水闸名称', field: 'stnm' },
                     { text: '状态', field: 'status' },

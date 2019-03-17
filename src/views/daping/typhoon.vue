@@ -48,9 +48,9 @@ export default {
       height: 0,
       itemHeight: 0,
       itemContent: [
-        { title: "气压分析", columns: ["hour", "windpower"], data: [] },
-        { title: "风力分析", columns: ["hour", "windspeed"], data: [] },
-        { title: "移速分析", columns: ["hour", "movingspeed"], data: [] }
+        { title: "气压分析", columns: ["hour", "windpower"], data: [], formatte: 'Pa' },
+        { title: "风力分析", columns: ["hour", "windspeed"], data: [], formatte: 'm/s' },
+        { title: "移速分析", columns: ["hour", "movingspeed"], data: [], formatte: 'km/h' }
       ],
       data: []
     };
@@ -74,10 +74,11 @@ export default {
   watch: {
     showBig: function(val) {
       setTimeout(() => {
-        if(val === 'true'){
+        if(val === true){
           this.itemHeight = Math.floor(this.$refs['bottom'].offsetHeight / 3);
+          console.log(123)   
         }
-      },0)
+      },200)
     }
   },
   methods: {

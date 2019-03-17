@@ -2,7 +2,7 @@
   <div class="analysis" ref="analysis">
     <Head :title="item.title"/>
     <div class="content">
-      <ve-line :data="chartData" :height="chartHeight + 'px'" :grid="grid" :legend-visible="false" :settings="chartSettings"></ve-line>
+      <ve-line :data="chartData" :height="chartHeight + 'px'" :grid="grid" :legend-visible="false" :settings="chartSettings" :yAxis="yAxis"></ve-line>
     </div>
   </div>
 </template>
@@ -40,6 +40,12 @@ export default {
           windspeed: "风力",
           movingspeed: "风速"
         }
+      },
+      yAxis: {
+          type: 'value',
+          axisLabel: {
+              formatter: '{value}' + this.item.formatte 
+          }
       }
     };
   },

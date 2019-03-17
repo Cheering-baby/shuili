@@ -18,6 +18,12 @@ import suber from '@/components/sub/subLine.vue'
 
 const shuiku = () => import ('./components/shuiku.vue')
 const shuiza = () => import ('./components/shuiza.vue')
+const bhdx = () => import ('./components/bhdx.vue')
+const bzd = () => import ('./components/bzd.vue')
+const dwd = () => import ('./components/dwd.vue')
+const wf = () => import ('./components/wf.vue')
+const cwz = () => import ('./components/cwz.vue')
+const sxxx = () => import ('./components/sxxx.vue')
 export default {
   name: 'zonghe',
   data () {
@@ -40,7 +46,13 @@ export default {
     changeComponent (type) {
       const item = [
         {name: 'shuiku', component: shuiku},
-        {name: 'shuiza', component: shuiza}
+        {name: 'shuiza', component: shuiza},
+        {name: 'bhdx', component: bhdx},
+        {name: 'bizhaidian', component: bzd},
+        {name: 'dwd', component: dwd},
+        {name: 'wf', component: wf},
+        {name: 'cwz', component: cwz},
+        {name: 'sxxx', component: sxxx}
       ]
       let now = item.filter(f => f.name === type)
       this.component = now[0].component

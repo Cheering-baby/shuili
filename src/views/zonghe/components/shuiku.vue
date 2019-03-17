@@ -29,7 +29,7 @@ export default {
                providerUrl: 'http://192.168.118.226:9831/webapi/api/v2/basic/data?key=s_sk_responsible'
            },
             form: {
-                label: '水库基础信息',
+                label: '基础信息',
                 target: 'ennmcd', 
                 columns: [
                     { text: '水库名称', field: 'ennm' },

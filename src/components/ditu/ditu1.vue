@@ -43,7 +43,7 @@
                 </el-col>
             </el-row>
         </div>
-        <div class="table_two">
+        <div class="table_two" v-if="table.lable != undefined">
             <div class="table_label">{{table.label}}</div>
             <el-table :data="tableData" :header-cell-style="headerStyle" stripe border>
                 <el-table-column :property="item.field" :label="item.text" :width="item.width" v-for="item in table.columns" :key="item.text"></el-table-column>
@@ -55,7 +55,6 @@
 
 <script>
 import Vue from 'vue'
-import searchModule from './searchModule.vue'
 import dmap from '@istrong/dmap'
 import {Table,TableColumn, Dialog, Select, Option, Button, Radio, Row, Col} from 'element-ui'
 Vue.use(dmap)
@@ -70,7 +69,7 @@ Vue.use(Row)
 Vue.use(Col)
 export default {
     name: 'mainPage',
-    components: { searchModule },
+    components: {  },
     props:{
       columns: {
           type: Array,
@@ -206,10 +205,10 @@ export default {
                     },
                     tooltip: {
                         zoom: 15,
-                        text: data.stnm,
+                        text: data[this.chart['nameField']],
                         direction: "top"
                     }                    
-                        }
+                }
             })
         },
         showPoint(row) {
@@ -219,10 +218,11 @@ export default {
             // let lat = row.lat
             // let lon = row.lon
             let url = this.chart['providerUrl'].replace(/(\s*$)/g,"")
-            let stcd = row['stcd'].replace(/(\s*$)/g,"")
-            
+            // let stcd = row['stcd'].replace(/(\s*$)/g,"")
+            let stcd = row['stcd']
             
             this.title = row[this.chart['nameField']]
+            console.log(row[this.chart['nameField']])
             this.$Axios
               .get(url,{
                params:{
@@ -230,16 +230,16 @@ export default {
                }
               })
               .then(d => {
-                  console.log(d.data.data)
+                //   console.log(d.data.data)
                   this.dialogTableVisible = true
-                  this.title = row.stnm
+                //   this.title = row.stnm
                   this.tableData = d.data.data
               })
         },
         showPoint1(row){
             this.timer&&clearTimeout(this.timer)
             this.timer = setTimeout(() => {
-                this.map.setView([row.lon, row.lat], 10)
+                this.map.setView([row.lon, row.lat], 15)
             },300) 
         },
         change() {
@@ -255,6 +255,7 @@ export default {
 .el-dialog__header{
     background-color: rgb(28, 123, 232);
     padding-top:10px;
+    height:24px;
 }
 .el-dialog__body{
     padding-top:0;

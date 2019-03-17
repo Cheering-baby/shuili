@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;">
+  <div style="width:100%;user-select:none;">
       <el-menu
         default-active="3-1"
         class="el-menu-vertical-demo"
@@ -16,9 +16,9 @@
         <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-location"></i>
-            <span>基础信息</span>
+            <span>监测信息</span>
           </template>
-            <el-menu-item index="2-1" @click="changeItem('xzqh')">行政区划</el-menu-item>
+            <el-menu-item index="2-1" @click="changeItem('cwz')">潮位站</el-menu-item>
             <el-menu-item index="2-2" @click="changeItem('sxxx')">水系信息</el-menu-item>
         </el-submenu>        
         <el-submenu index="3">

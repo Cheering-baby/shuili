@@ -55,7 +55,6 @@
 
 <script>
 import Vue from 'vue'
-import searchModule from './searchModule.vue'
 import dmap from '@istrong/dmap'
 import {Table,TableColumn, Dialog, Select, Option, Button, Radio, Row, Col} from 'element-ui'
 Vue.use(dmap)
@@ -70,7 +69,7 @@ Vue.use(Row)
 Vue.use(Col)
 export default {
     name: 'mainPage',
-    components: { searchModule },
+    components: {  },
     props:{
       columns: {
           type: Array,
@@ -239,7 +238,7 @@ export default {
         showPoint1(row){
             this.timer&&clearTimeout(this.timer)
             this.timer = setTimeout(() => {
-                this.map.setView([row.lon, row.lat], 10)
+                this.map.setView([row.lon, row.lat], 15)
             },300) 
         },
         change() {
