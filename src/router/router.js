@@ -24,6 +24,11 @@ export default new Router({
       path: '/dengru',
       name: 'dengru',
       component: () => import('@/views/dengru/dengru.vue')
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: () => import('@/views/daping/test.vue')
     }
   ]
 })

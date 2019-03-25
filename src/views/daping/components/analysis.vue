@@ -12,7 +12,10 @@ import Head from "@/components/head/head.vue";
 import VeLine from "v-charts/lib/line.common";
 export default {
   props: {
-    itemHeight: Number,
+    itemHeight: {
+      type:Number,
+      default: 150
+    },
     columns: Array,
     item: Object
   },
@@ -57,7 +60,7 @@ export default {
   created() {},
   mounted() {
     // console.log(this.$refs.analysis.offsetHeight)
-    setTimeout(() => {
+    // setTimeout(() => {
       this.chartHeight = this.itemHeight - 25;
       this.chartData.columns = this.item.columns;
       this.$Axios
@@ -71,7 +74,7 @@ export default {
           //     this.itemContent[i].data = this.data;
           //   }
         });
-    }, 0);
+    // }, 0);
   },
 
   methods: {}

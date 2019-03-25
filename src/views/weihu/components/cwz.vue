@@ -6,7 +6,7 @@
       <el-table-column prop="name" label="警戒线" width="100"></el-table-column>
       <el-table-column prop="address" label="时间"></el-table-column>
     </el-table> -->
-    <iframe scrolling="no" src="http://192.168.118.226:9831/CommonReport/TableList.aspx?TableDBID=10326&PowerSetStr=Add,Update,Del,Sort,Em,Im" frameborder="0" width="100%" :height="height" allowtransparency="true" color="000000"></iframe>
+    <iframe scrolling="no" src="http://192.168.118.226:9831/CommonReport/TableList.aspx?TableDBID=10326&PowerSetStr=Add,Update,Del" frameborder="0" width="100%" :height="height" allowtransparency="true" color="000000"></iframe>
   </div>
 </template>
 

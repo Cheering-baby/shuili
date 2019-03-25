@@ -2,10 +2,10 @@
   <div>
     <headBar title="实时水情" style="margin-bottom:10px;" />
     <el-table :data="tableData" stripe style="width: 100%" border :header-cell-style="headerStyle" height="280">
-      <el-table-column prop="date" label="站名" width="100"></el-table-column>
-      <el-table-column prop="name" label="水位" width="80"></el-table-column>
-      <el-table-column prop="name" label="警戒线" width="100"></el-table-column>
-      <el-table-column prop="address" label="时间"></el-table-column>
+      <el-table-column prop="stcd" label="站名" width="100"></el-table-column>
+      <el-table-column prop="level" label="水位(m)" width="80"></el-table-column>
+      <el-table-column prop="warn" label="警戒线" width="100"></el-table-column>
+      <el-table-column prop="date" label="时间"></el-table-column>
     </el-table>
   </div>
 </template>
@@ -22,24 +22,28 @@ export default {
     return {
       tableData: [
         {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          date: "2019-03-25 10:00:00",
+          stcd: "站点1",
+          level: '10.0',
+          warn: "15.0"
         },
         {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
+          date: "2019-03-25 12:00:00",
+          stcd: "站点2",
+          level: '9.5',
+          warn: "12.0"
         },
         {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
+          date: "2019-03-25 12:30:00",
+          stcd: "站点3",
+          level: '6.3',
+          warn: "14.3"
         },
         {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
+          date: "2019-03-25 11:00:00",
+          stcd: "站点4",
+          level: '6.9',
+          warn: "14.0"
         }
       ],
       headerStyle: {

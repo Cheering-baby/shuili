@@ -10,8 +10,10 @@
     </div>
     <div class="right">
         <tide />
-        <popup />
-        <popup title="雷达云图" />    
+        <!-- <popup /> -->
+        <!-- <popup title="雷达云图" />     -->
+        <test />
+        <test :url="this.url2" title=雷达云图 />
     </div>
   </div>
 </template>
@@ -22,10 +24,14 @@ import yuliang from "./yuliang.vue";
 import tide from "./tide.vue";
 import popup from "@/components/popup/popup.vue";
 import typhoon from "./typhoon.vue";
+import test from './test.vue'
 export default {
   name: "daping",
   data() {
-    return {};
+    return {
+      url1:'',
+      url2: 'http://192.168.118.226:9831/webapi/api/v1/weather/radar?time=%5B2019%2F03%2F24%2010%3A35%3A12%2C2019%2F03%2F25%2010%3A35%3A12%5D&sort=asc&type=BEFZ_M_XP4_P1&angle=0.5'
+    };
   },
 
   components: {
@@ -33,7 +39,8 @@ export default {
     yuliang,
     tide,
     popup,
-    typhoon
+    typhoon,
+    test
   },
 
   mounted() {},
