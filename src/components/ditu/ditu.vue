@@ -196,6 +196,7 @@ export default {
               })
         },
         init(map) {
+            // this.loading = this.$loading();
             let layer = this.map.layer();
             let data = this.testData;
             layer.addPoints(data,data => {
@@ -208,7 +209,7 @@ export default {
                         text: data.stnm,
                         direction: "top"
                     }                    
-                        }
+            }
             })
         },
         showPoint(row) {

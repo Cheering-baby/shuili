@@ -5,7 +5,7 @@
       <div class="fangda" @click="change('fangda')"></div>
     </div>
     <div class="time">{{time | format}}</div>
-    <img :src="currentImg" height='255'>
+    <img :src="currentImg" height="255">
     <div class="control">
       <div class="button">
         <div class="pre" @click="stepForward(-1)"></div>
@@ -16,16 +16,28 @@
         <el-slider v-model="value1" :show-tooltip="false" @change="changeImage()"></el-slider>
       </div>
     </div>
-    <transition name='fade' v-if="showBig">
+    <transition name="fade" v-if="showBig">
       <div class="quanping">
         <div class="title_big">
           <div class="title">{{title}}</div>
           <div class="suoxiao" @click="change('suoxiao')"></div>
         </div>
-        <div class="content"></div>
+        <div class="content">
+          <div class="time">{{time | format}}</div>
+          <img :src="currentImg" width="80%">
+        </div>
+        <div class="control">
+          <div class="button">
+            <div class="pre" @click="stepForward(-1)"></div>
+            <div :class="[isActive ? 'bofang' : 'pause']" @click="changeCondition()"></div>
+            <div class="nex" @click="stepForward(1)"></div>
+          </div>
+          <div class="move">
+            <el-slider v-model="value1" :show-tooltip="false" @change="changeImage()"></el-slider>
+          </div>
+        </div>
       </div>
     </transition>
-
   </div>
 </template>
 
@@ -35,21 +47,23 @@ import { Slider } from "element-ui";
 Vue.use(Slider);
 export default {
   props: {
-   title: {
-       type: String,
-       default: '卫星云图'
-   },
-   url: {
-     type: String,
-     default: "http://192.168.118.226:9831/webapi/api/v1/weather/cloud?time=%5B2019%2F03%2F24%2010%3A20%3A04%2C2019%2F03%2F25%2010%3A20%3A04%5D&sort=asc&type=FY2D_GPF_M_IR1_P1"
-   },
-   imageHeight: {
-     type: Number,
-     defalut: 100
-   }
+    title: {
+      type: String,
+      default: "卫星云图"
+    },
+    url: {
+      type: String,
+      default:
+        "http://192.168.118.226:9831/webapi/api/v1/weather/cloud?time=%5B2019%2F03%2F24%2010%3A20%3A04%2C2019%2F03%2F25%2010%3A20%3A04%5D&sort=asc&type=FY2D_GPF_M_IR1_P1"
+    },
+    imageHeight: {
+      type: Number,
+      defalut: 100
+    }
   },
   data() {
     return {
+      winH: document.documentElement.clientHeight || document.body.clientHeight,
       value1: 0, //滚轴百分比
       ImageData: [], //图片数据
       currentImg: "", //当前展示图片url
@@ -76,20 +90,16 @@ export default {
   },
   methods: {
     getDate() {
-      this.$Axios
-        .get(
-          this.url
-        )
-        .then(res => {
-          console.log(res.data.data);
-          this.ImageData = res.data.data;
-          this.currentImg = this.ImageData[0].filepath;
-          this.len = this.ImageData.length;
-          this.step = Math.ceil(100 / this.len);
-          this.currentImg = this.ImageData[this.currentIndex].filepath;
-          this.time = this.ImageData[this.currentIndex].producttime;
-          //   this.move()
-        });
+      this.$Axios.get(this.url).then(res => {
+        console.log(res.data.data);
+        this.ImageData = res.data.data;
+        this.currentImg = this.ImageData[0].filepath;
+        this.len = this.ImageData.length;
+        this.step = Math.ceil(100 / this.len);
+        this.currentImg = this.ImageData[this.currentIndex].filepath;
+        this.time = this.ImageData[this.currentIndex].producttime;
+        //   this.move()
+      });
     },
     changeImage(val) {
       this.isActive = false;
@@ -132,21 +142,21 @@ export default {
       }
     },
     stepForward(type) {
-       if(type === -1) {
-           this.currentIndex +=-1
-           console.log(-1)
-           if(this.currentIndex < 0){
-               this.currentIndex = 0
-           }
-       }else{
-         console.log(1)
-           this.currentIndex +=1
-           if(this.currentIndex > this.len-1){
-               this.currentIndex = this.len
-           }
-       }
-        this.currentImg = this.ImageData[this.currentIndex].filepath;
-        this.time = this.ImageData[this.currentIndex].producttime;
+      if (type === -1) {
+        this.currentIndex += -1;
+        console.log(-1);
+        if (this.currentIndex < 0) {
+          this.currentIndex = 0;
+        }
+      } else {
+        console.log(1);
+        this.currentIndex += 1;
+        if (this.currentIndex > this.len - 1) {
+          this.currentIndex = this.len;
+        }
+      }
+      this.currentImg = this.ImageData[this.currentIndex].filepath;
+      this.time = this.ImageData[this.currentIndex].producttime;
     },
     change(type) {
       if (type === "fangda") {
@@ -165,7 +175,7 @@ export default {
   width: 400px;
   // margin-left: 10px;
   // margin-top: 20px;
-  margin-bottom:5px;
+  margin-bottom: 5px;
   position: relative;
   img {
     width: 100%;
@@ -245,15 +255,15 @@ export default {
       // margin-top:-2px;s
     }
   }
-  .quanping{
-    position:fixed;
-    top:60px;
-    left:0;
-    bottom:0;
-    right:0;
-    background-color:rgba(0, 0, 0, 0.8);
-    z-index:2019;
-    color:#fff;
+  .quanping {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2019;
+    color: #fff;
     .title_big {
       display: flex;
       justify-content: space-between;
@@ -271,8 +281,72 @@ export default {
         cursor: pointer;
       }
     }
-    .content{
-      display:relative;
+    .content {
+      position: relative;
+      width: 70%;
+      margin: 0 auto;
+      height: 80%;
+      margin-top: 20px;
+      img {
+        height: 100%;
+      }
+      .time {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        right: 0;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.2);
+        color: #fff;
+        font-size: 18px;
+      }
+    }
+    .control {
+      width: 70%;
+      margin: 0 auto;
+      height:80px;
+      display:flex;
+      justify-content: center;
+      align-items:center;
+      margin-top:20px;
+      .button {
+        cursor: pointer;
+        // flex-grow: 1;
+        display: flex;
+        // align-items:center;
+        padding-right: 10px;
+        .pause,
+        .pre,
+        .nex,
+        .bofang {
+          //   flex-grow:1;
+          width: 60px;
+          height: 60px;
+        }
+        .pause {
+          background: url(/public/img/b_zt.png) no-repeat center;
+          // background-size: 120% 120%;
+        }
+        .bofang {
+          background: url(/public/img/b_bf.png) no-repeat center;
+          // background-size: 90% 90%;
+        }
+        .pre,
+        .nex {
+          background: url(/public/img/b_step.png) no-repeat center;
+          background-size: 50% 50%;
+        }
+        .pre {
+          transform: rotate(180deg);
+          margin-top: 2px;
+        }
+      }
+      .move {
+        width: 500px;
+        // margin-top:-2px;
+      }
     }
   }
 }

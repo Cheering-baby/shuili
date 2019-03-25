@@ -53,10 +53,12 @@ export default {
     },
     methods:{
        getData() {
+         this.loading = this.$loading();
          this.$Axios
             .get('http://192.168.118.226:9831/webapi/api/v1/sluicepump/match?time=%5B2019-03-15%2021%3A00%3A00%2C2019-03-16%2021%3A00%3A00%5D&type=ZM')
             .then(d => {
                 this.testData = d.data.data
+                this.loading.close();
             })
        }
     }
