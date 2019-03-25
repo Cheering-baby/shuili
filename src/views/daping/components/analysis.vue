@@ -2,7 +2,7 @@
   <div class="analysis" ref="analysis">
     <Head :title="item.title"/>
     <div class="content">
-      <ve-line :data="chartData" :height="chartHeight + 'px'" :grid="grid" :legend-visible="false" :settings="chartSettings" :yAxis="yAxis"></ve-line>
+      <ve-line :data="chartData" :height="160 + 'px'" :grid="grid" :legend-visible="false" :settings="chartSettings" :yAxis="yAxis"></ve-line>
     </div>
   </div>
 </template>

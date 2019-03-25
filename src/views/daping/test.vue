@@ -5,18 +5,27 @@
       <div class="fangda" @click="change('fangda')"></div>
     </div>
     <div class="time">{{time | format}}</div>
-    <img :src="currentImg" alt>
+    <img :src="currentImg" height='255'>
     <div class="control">
       <div class="button">
-        <div class="pre" @click="step(-1)"></div>
+        <div class="pre" @click="stepForward(-1)"></div>
         <div :class="[isActive ? 'bofang' : 'pause']" @click="changeCondition()"></div>
-        <div class="nex" @click="step(1)"></div>
+        <div class="nex" @click="stepForward(1)"></div>
       </div>
       <div class="move">
         <el-slider v-model="value1" :show-tooltip="false" @change="changeImage()"></el-slider>
       </div>
     </div>
-    <div class="quping"></div>
+    <transition name='fade' v-if="showBig">
+      <div class="quanping">
+        <div class="title_big">
+          <div class="title">{{title}}</div>
+          <div class="suoxiao" @click="change('suoxiao')"></div>
+        </div>
+        <div class="content"></div>
+      </div>
+    </transition>
+
   </div>
 </template>
 
@@ -33,6 +42,10 @@ export default {
    url: {
      type: String,
      default: "http://192.168.118.226:9831/webapi/api/v1/weather/cloud?time=%5B2019%2F03%2F24%2010%3A20%3A04%2C2019%2F03%2F25%2010%3A20%3A04%5D&sort=asc&type=FY2D_GPF_M_IR1_P1"
+   },
+   imageHeight: {
+     type: Number,
+     defalut: 100
    }
   },
   data() {
@@ -45,7 +58,8 @@ export default {
       currentIndex: 0,
       time: "2019年3月18日", //标题时间,
       step: 0,
-      isActive: false
+      isActive: false,
+      showBig: false
     };
   },
 
@@ -102,7 +116,7 @@ export default {
         }
 
         // console.log(123)
-      }, 1000);
+      }, 800);
     },
     changeCondition() {
       this.isActive = !this.isActive;
@@ -116,20 +130,33 @@ export default {
       } else {
         clearInterval(this.timer);
       }
+    },
+    stepForward(type) {
+       if(type === -1) {
+           this.currentIndex +=-1
+           console.log(-1)
+           if(this.currentIndex < 0){
+               this.currentIndex = 0
+           }
+       }else{
+         console.log(1)
+           this.currentIndex +=1
+           if(this.currentIndex > this.len-1){
+               this.currentIndex = this.len
+           }
+       }
+        this.currentImg = this.ImageData[this.currentIndex].filepath;
+        this.time = this.ImageData[this.currentIndex].producttime;
+    },
+    change(type) {
+      if (type === "fangda") {
+        this.showBig = true;
+      }
+      if (type === "suoxiao") {
+        this.showBig = false;
+      }
+      console.log("done");
     }
-    // step(type) {
-    //    if(type === -1) {
-    //        this.currentIndex +=-1
-    //        if(this.currentIndex < 0){
-    //            this.currentIndex = 0
-    //        }
-    //    }else{
-    //        this.currentIndex +=1
-    //        if(this.currentIndex > 0){
-    //            this.currentIndex = 0
-    //        }
-    //    }
-    // }
   }
 };
 </script>
@@ -177,13 +204,13 @@ export default {
     //   width:100%;
     padding-right: 5px;
     display: flex;
-    align-items: center;
+    // align-items: center;
     //   .pause{
     //       background:url(/public/img/bf.png);
     //   }
     .button {
       cursor: pointer;
-      flex-grow: 1;
+      // flex-grow: 1;
       display: flex;
       // align-items:center;
       padding-right: 10px;
@@ -214,12 +241,46 @@ export default {
       }
     }
     .move {
-      width: 250px;
-      // margin-top:-2px;
+      width: 270px;
+      // margin-top:-2px;s
     }
   }
-  .quping{
+  .quanping{
     position:fixed;
+    top:60px;
+    left:0;
+    bottom:0;
+    right:0;
+    background-color:rgba(0, 0, 0, 0.8);
+    z-index:2019;
+    color:#fff;
+    .title_big {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: solid 8px rgb(31, 156, 255);
+      padding-left: 10px;
+      .title {
+        font-size: 20px;
+      }
+      .suoxiao {
+        width: 32px;
+        height: 30px;
+        background: url(/public/img/suoxiao.png) top 8px left 0px no-repeat;
+        background-size: 60% 60%;
+        cursor: pointer;
+      }
+    }
+    .content{
+      display:relative;
+    }
   }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
