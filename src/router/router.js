@@ -8,7 +8,12 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/daping/daping.vue')
+      component: () => import('@/views/daping/daping1.vue')
+    },
+    {
+      path: '/daping',
+      name: 'daping',
+      component: () => import('@/views/daping/daping1.vue')
     },
     {
       path: '/zonghe',
@@ -28,7 +33,7 @@ export default new Router({
     {
       path: '/test',
       name: 'test',
-      component: () => import('@/views/daping/test.vue')
+      component: () => import('@/views/daping/daping.vue')
     }
   ]
 })

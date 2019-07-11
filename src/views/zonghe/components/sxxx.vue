@@ -53,11 +53,13 @@ export default {
     },
     methods:{
        getData() {
+           this.loading = this.$loading();
          this.$Axios
             .get('http://192.168.118.226:9831/webapi/api/v2/basic/data?key=s_basin_list&')
             .then(d => {
                 console.log(d)
                 this.testData = d.data.data
+                this.loading.close()
             })
        }
     }

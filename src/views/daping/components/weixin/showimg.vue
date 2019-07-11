@@ -1,11 +1,9 @@
 <template>
   <div class="block">
-    <div class="top">
-      <div class="title">{{title}}</div>
-      <div class="fangda" @click="change('fangda')"></div>
+    <div class="content">
+      <img :src="currentImg" width="70%" height="90%" id="images">
+      <!-- <img :src="currentImg" id="images"> -->
     </div>
-    <div class="time">{{time | format}}</div>
-    <img :src="currentImg" height="255">
     <div class="control">
       <div class="button">
         <div class="pre" @click="stepForward(-1)"></div>
@@ -16,35 +14,16 @@
         <el-slider v-model="value1" :show-tooltip="false" @change="changeImage()"></el-slider>
       </div>
     </div>
-    <transition name="fade" v-if="showBig">
-      <div class="quanping">
-        <div class="title_big">
-          <div class="title">{{title}}</div>
-          <div class="suoxiao" @click="change('suoxiao')"></div>
-        </div>
-        <div class="content">
-          <div class="time">{{time | format}}</div>
-          <img :src="currentImg" width="80%">
-        </div>
-        <div class="control">
-          <div class="button">
-            <div class="pre" @click="stepForward(-1)"></div>
-            <div :class="[isActive ? 'bofang' : 'pause']" @click="changeCondition()"></div>
-            <div class="nex" @click="stepForward(1)"></div>
-          </div>
-          <div class="move">
-            <el-slider v-model="value1" :show-tooltip="false" @change="changeImage()"></el-slider>
-          </div>
-        </div>
-      </div>
-    </transition>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
+import viewer from "viewerjs";
 import { Slider } from "element-ui";
+import "viewerjs/dist/viewer.min.css";
 Vue.use(Slider);
+let myViewer;
 export default {
   props: {
     title: {
@@ -53,12 +32,11 @@ export default {
     },
     url: {
       type: String,
-      default:
-        "http://imgapi.istrongcloud.com:8025/images/cloud/fy2/12"
+      default: "http://imgapi.istrongcloud.com:8025/images/cloud/fy2/12"
     },
-    imageHeight: {
+    speed: {
       type: Number,
-      defalut: 100
+      default: 1000
     }
   },
   data() {
@@ -70,7 +48,7 @@ export default {
       timer: null, //定时器
       len: 0, //图片数组长度,
       currentIndex: 0,
-      time: "2019年3月18日", //标题时间,
+      // time: "2019年3月18日", //标题时间,
       step: 0,
       isActive: false,
       showBig: false
@@ -78,7 +56,12 @@ export default {
   },
 
   components: {},
-
+  watch: {
+    url: function() {
+      this.getDate()
+      console.log('change url')
+    }
+  },
   mounted() {
     this.getDate();
   },
@@ -90,15 +73,35 @@ export default {
   },
   methods: {
     getDate() {
+      this.loading = this.$loading({background:'rgba(0, 0, 0, 0.8)'});
       this.$Axios.get(this.url).then(res => {
-        console.log(res.data.data);
+        console.log(res.data);
         this.ImageData = res.data;
         this.currentImg = this.ImageData[0].url;
         this.len = this.ImageData.length;
         this.step = Math.ceil(100 / this.len);
         this.currentImg = this.ImageData[this.currentIndex].url;
         this.time = this.ImageData[this.currentIndex].producttime;
+        this.loading.close();
         //   this.move()
+        myViewer = new viewer(document.getElementById("images"), {
+          toolbar: {
+            zoomIn: 4,
+            zoomOut: 4,
+            oneToOne: 4,
+            reset: 4,
+            prev: 4,
+            play: {
+              show: 4,
+              size: "large"
+            },
+            next: 4,
+            rotateLeft: 4,
+            rotateRight: 4,
+            flipHorizontal: 4,
+            flipVertical: 4
+          }
+        });
       });
     },
     changeImage(val) {
@@ -126,7 +129,7 @@ export default {
         }
 
         // console.log(123)
-      }, 800);
+      }, this.speed);
     },
     changeCondition() {
       this.isActive = !this.isActive;
@@ -157,6 +160,7 @@ export default {
       }
       this.currentImg = this.ImageData[this.currentIndex].url;
       this.time = this.ImageData[this.currentIndex].producttime;
+      this.value1 = 100 * this.currentIndex/(this.len - 1)
     },
     change(type) {
       if (type === "fangda") {
@@ -172,156 +176,37 @@ export default {
 </script>
 <style lang='scss' scoped>
 .block {
-  width: 400px;
-  // margin-left: 10px;
-  // margin-top: 20px;
-  margin-bottom: 5px;
+  width: 100%;
+  height: calc(100% - 50px);
   position: relative;
-  img {
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  .content {
     width: 100%;
-  }
-  .top {
-    height: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: solid 8px rgb(31, 156, 255);
-    padding-left: 10px;
-    margin-bottom: 5px;
-    .title {
-      font-size: 16px;
-    }
-    .fangda {
-      width: 32px;
-      height: 30px;
-      background: url(/public/img/fangda.png) top 8px left 0px no-repeat;
-      background-size: 60% 60%;
-      cursor: pointer;
+    height: calc(100% - 120px);
+    position: relative;
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
     }
   }
-  .time {
-    position: absolute;
-    top: 35px;
-    left: 0;
-    right: 0;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.2);
-    color: #fff;
-  }
-  .control {
-    //   width:100%;
-    padding-right: 5px;
-    display: flex;
-    // align-items: center;
-    //   .pause{
-    //       background:url(/public/img/bf.png);
-    //   }
-    .button {
-      cursor: pointer;
-      // flex-grow: 1;
-      display: flex;
-      // align-items:center;
-      padding-right: 10px;
-      .pause,
-      .pre,
-      .nex,
-      .bofang {
-        //   flex-grow:1;
-        width: 33px;
-        height: 33px;
-      }
-      .pause {
-        background: url(/public/img/zt.png) no-repeat center;
-        background-size: 120% 120%;
-      }
-      .bofang {
-        background: url(/public/img/bf.png) no-repeat center;
-        background-size: 90% 90%;
-      }
-      .pre,
-      .nex {
-        background: url(/public/img/step.png) no-repeat center;
-        background-size: 70% 70%;
-      }
-      .pre {
-        transform: rotate(180deg);
-        margin-top: 2px;
-      }
-    }
-    .move {
-      width: 270px;
-      // margin-top:-2px;s
-    }
-  }
-  .quanping {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 2019;
-    color: #fff;
-    .title_big {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-left: solid 8px rgb(31, 156, 255);
-      padding-left: 10px;
-      .title {
-        font-size: 20px;
-      }
-      .suoxiao {
-        width: 32px;
-        height: 30px;
-        background: url(/public/img/suoxiao.png) top 8px left 0px no-repeat;
-        background-size: 60% 60%;
-        cursor: pointer;
-      }
-    }
-    .content {
-      position: relative;
-      width: 70%;
-      margin: 0 auto;
-      height: 80%;
-      margin-top: 20px;
-      img {
-        height: 100%;
-      }
-      .time {
-        position: absolute;
-        top: 0px;
-        left: 0;
-        right: 0;
-        height: 40px;
-        line-height: 40px;
-        text-align: center;
-        background-color: rgba(0, 0, 0, 0.2);
-        color: #fff;
-        font-size: 18px;
-      }
-    }
     .control {
       width: 70%;
       margin: 0 auto;
-      height:80px;
-      display:flex;
+      height: 80px;
+      display: flex;
       justify-content: center;
-      align-items:center;
-      margin-top:20px;
+      align-items: center;
+      margin-top: 20px;
       .button {
         cursor: pointer;
-        // flex-grow: 1;
         display: flex;
-        // align-items:center;
         padding-right: 10px;
         .pause,
         .pre,
         .nex,
         .bofang {
-          //   flex-grow:1;
           width: 60px;
           height: 60px;
         }
@@ -345,16 +230,8 @@ export default {
       }
       .move {
         width: 500px;
-        // margin-top:-2px;
       }
     }
-  }
 }
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 1s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
+
 </style>

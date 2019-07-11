@@ -1,7 +1,7 @@
 <template>
   <div class="toubu">
      <div class="time">{{date}}</div>
-     <div class="title">水利防汛信息化平台</div>
+     <div class="title">水利气象信息化平台</div>
      <div class="nav">
        <div class="nav1" @click="zonghe(1)">
          <div class="img" style="background:url(/public/img/zhuye.png) no-repeat;background-size:100% 100%;"></div>
@@ -41,7 +41,7 @@ export default {
     zonghe (type) {
       switch(type) {
         case 1:
-        this.$router.push('/')
+        this.$router.push('/daping')
         break
         case 2:
         this.$router.push('/zonghe')

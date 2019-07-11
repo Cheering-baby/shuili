@@ -14,9 +14,12 @@
   "dependencies": {
     "@istrong/dmap": "^0.3.6",
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "echarts": "^4.1.0",
     "element-ui": "^2.6.0",
+    "swiper": "^4.5.0",
     "v-charts": "^1.19.0",
+    "viewerjs": "^1.3.2",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -26,8 +29,8 @@
     "@vue/cli-plugin-eslint": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
     "@vue/eslint-config-standard": "^3.0.1",
+    "node-sass": "^4.11.0",
     "normalize.css": "^8.0.0",
-    "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.5.17"
   }

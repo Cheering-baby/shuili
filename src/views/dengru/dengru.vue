@@ -1,10 +1,10 @@
 <template>
   <div class="dengru">
     <div class="center">
-      <div class="title">水利防汛信息化平台</div>
+      <div class="title">水利气象信息化平台</div>
       <div class="zhanghao">
         <div class="text">账号</div>
-        <el-input v-model="zhanghao" placeholder="请输入账号" suffix-icon="el-icon-tickets"></el-input>
+        <el-input v-model="user" placeholder="请输入账号" suffix-icon="el-icon-tickets"></el-input>
       </div>
       <div class="mima">
         <div class="text">密码</div>
@@ -38,7 +38,7 @@ export default {
   name: "dengru",
   data() {
     return {
-      zhanghao: "",
+      user: "",
       password: "",
       syzm: '',
       yzm: ""
@@ -97,6 +97,10 @@ export default {
     //   this.yzm = code
     // },
     judge () {
+      if(this.user != 'dzh' || this.password != '123456'){
+        this.$message.error('账号或者密码错误')
+        return false
+      }
       if(this.syzm !== this.yzm) {
         this.$message.error('验证码错误')
         return false

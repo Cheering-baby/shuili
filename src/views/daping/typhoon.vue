@@ -5,7 +5,7 @@
       <div class="fangda" @click="change('fangda')"></div>
     </div>
     <div class="map" :style="{height:height + 'px'}">
-      <dmap @init="init" :center="[120,20]" :zoom="4.8" provider="GaodeMap.Normal"/>
+      <dmap @init="init" :center="[120,20]" :zoom="4.8" provider="GaodeMap.Normal" style="width:100%;" />
     </div>
     <transition name="fade">
       <div class="typhoonBig" v-if="showBig">

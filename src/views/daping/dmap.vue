@@ -1,5 +1,5 @@
 <template>
-  <dmap @init="init1" :center="[120,20]" :zoom="4.8" provider="GaodeMap.Normal"/>
+  <dmap @init="init1" :center="[120,20]" :zoom="4.8" provider="GaodeMap.Normal" style="width:100%;" />
 </template>
 
 <script>

@@ -1,0 +1,160 @@
+{
+    "message": "查询成功",
+    "status": "200",
+    "data": [
+        {
+            "id": "101230101",
+            "cityEn": "fuzhou",
+            "cityZh": "福州",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "26.075302",
+            "lon": "119.306239"
+        },
+        {
+            "id": "101230102",
+            "cityEn": "minqing",
+            "cityZh": "闽清",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "26.223793",
+            "lon": "118.868416"
+        },
+        {
+            "id": "101230103",
+            "cityEn": "minhou",
+            "cityZh": "闽侯",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "26.148567",
+            "lon": "119.145117"
+        },
+        {
+            "id": "101230104",
+            "cityEn": "luoyuan",
+            "cityZh": "罗源",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "26.487234",
+            "lon": "119.552645"
+        },
+        {
+            "id": "101230105",
+            "cityEn": "lianjiang",
+            "cityZh": "连江",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "26.202109",
+            "lon": "119.538365"
+        },
+        {
+            "id": "101230106",
+            "cityEn": "gulou",
+            "cityZh": "鼓楼",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "26.082284",
+            "lon": "119.29929"
+        },
+        {
+            "id": "101230107",
+            "cityEn": "yongtai",
+            "cityZh": "永泰",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "25.864825",
+            "lon": "118.939089"
+        },
+        {
+            "id": "101230108",
+            "cityEn": "pingtan",
+            "cityZh": "平潭",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "25.503672",
+            "lon": "119.791197"
+        },
+        {
+            "id": "101230109",
+            "cityEn": "taijiang",
+            "cityZh": "台江",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "26.058616",
+            "lon": "119.310156"
+        },
+        {
+            "id": "101230110",
+            "cityEn": "changle",
+            "cityZh": "长乐",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "25.960583",
+            "lon": "119.510849"
+        },
+        {
+            "id": "101230111",
+            "cityEn": "fuqing",
+            "cityZh": "福清",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "25.720402",
+            "lon": "119.376992"
+        },
+        {
+            "id": "101230112",
+            "cityEn": "cangshan",
+            "cityZh": "仓山",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "26.038912",
+            "lon": "119.320988"
+        },
+        {
+            "id": "101230113",
+            "cityEn": "mawei",
+            "cityZh": "马尾",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "25.991975",
+            "lon": "119.458725"
+        },
+        {
+            "id": "101230114",
+            "cityEn": "jinan",
+            "cityZh": "晋安",
+            "provinceEn": "fujian",
+            "provinceZh": "福建",
+            "leaderEn": "fuzhou",
+            "leaderZh": "福州",
+            "lat": "26.078837",
+            "lon": "119.328597"
+        }
+    ]
+}

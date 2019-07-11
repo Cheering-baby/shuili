@@ -1,0 +1,148 @@
+/* tap-highlight */
+[tap-highlight]{
+    position: relative;-webkit-appearance: none;
+    -webkit-text-size-adjust: 100%
+}
+[tap-highlight]::before {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    border: inherit;
+    border-color: #909399;
+    background-color: #909399;
+    border-radius: inherit;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+[tap-highlight]:active::before {
+    opacity: 0.15;
+}
+[content]{
+    height: 100%;
+    width:100%;
+    position: relative;
+    /* overflow: hidden; */
+}
+/* text-align */
+
+[text-center] {
+    text-align: center
+}
+
+[text-left] {
+    text-align: left
+}
+
+[text-right] {
+    text-align: right
+}
+
+/* padding */
+
+[padding-5] {
+    border: solid 1px #e6e6e6;
+    padding: 5px;
+}
+[padding-10] {
+    padding:10px;
+}
+[padding-top-10] {
+    padding-top: 10px
+}
+
+[padding-right-10] {
+    padding-right: 10px
+}
+
+[padding-bottom-10] {
+    padding-bottom: 10px
+}
+
+[padding-left-10] {
+    padding-left: 10px
+}
+
+/* margin */
+
+[margin-10] {
+    margin: 10px
+}
+
+[margin-top-10] {
+    margin-top: 10px
+}
+
+[margin-right-10] {
+    margin-right: 10px
+}
+
+[margin-bottom-10] {
+    margin-bottom: 10px
+}
+
+[margin-left-10] {
+    margin-left: 10px
+}
+
+/* backgroud-color */
+
+[bgc-white] {
+    background-color: #fff
+}
+
+[bgc-theme] {
+    background-color: #f4f5f7
+}
+
+[img]{
+    max-height: 100%;
+    /* width: 100%; */
+}
+/* shadow */
+
+[shadow] {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+}
+
+[shadow-card] {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
+}
+[float] {
+    float: left;
+}
+[float-right]{
+    float: right;
+}
+[overflow] {
+    overflow: hidden;
+}
+[font-size-24]{
+    font-size: 24px;
+}
+[font-size-16]{
+    font-size: 16px;
+}
+[center]{
+    display: inline-block;
+    vertical-align: middle;
+}
+[text-overflow]{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+[img-center]{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bg{
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  }

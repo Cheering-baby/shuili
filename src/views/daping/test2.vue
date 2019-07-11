@@ -43,8 +43,6 @@
 
 <script>
 import Vue from "vue";
-import { Slider } from "element-ui";
-Vue.use(Slider);
 export default {
   props: {
     title: {
@@ -54,7 +52,7 @@ export default {
     url: {
       type: String,
       default:
-        "http://imgapi.istrongcloud.com:8025/images/cloud/fy2/12"
+        "http://192.168.118.226:9831/webapi/api/v1/weather/cloud?time=%5B2019%2F03%2F24%2010%3A20%3A04%2C2019%2F03%2F25%2010%3A20%3A04%5D&sort=asc&type=FY2D_GPF_M_IR1_P1"
     },
     imageHeight: {
       type: Number,
@@ -92,11 +90,11 @@ export default {
     getDate() {
       this.$Axios.get(this.url).then(res => {
         console.log(res.data.data);
-        this.ImageData = res.data;
-        this.currentImg = this.ImageData[0].url;
+        this.ImageData = res.data.data;
+        this.currentImg = this.ImageData[0].filepath;
         this.len = this.ImageData.length;
         this.step = Math.ceil(100 / this.len);
-        this.currentImg = this.ImageData[this.currentIndex].url;
+        this.currentImg = this.ImageData[this.currentIndex].filepath;
         this.time = this.ImageData[this.currentIndex].producttime;
         //   this.move()
       });
@@ -106,7 +104,7 @@ export default {
       //   console.log(this.value1);
       clearInterval(this.timer);
       this.currentIndex = Math.round(this.value1 / this.step);
-      this.currentImg = this.ImageData[this.currentIndex].url;
+      this.currentImg = this.ImageData[this.currentIndex].filepath;
       this.time = this.ImageData[this.currentIndex].producttime;
     },
     move() {
@@ -114,7 +112,7 @@ export default {
       //   console.log(step)
       this.timer = setInterval(() => {
         this.value1 += this.step;
-        this.currentImg = this.ImageData[this.currentIndex].url;
+        this.currentImg = this.ImageData[this.currentIndex].filepath;
         this.time = this.ImageData[this.currentIndex].producttime;
         this.currentIndex += 1;
         if (this.value1 >= 100) {
@@ -155,7 +153,7 @@ export default {
           this.currentIndex = this.len;
         }
       }
-      this.currentImg = this.ImageData[this.currentIndex].url;
+      this.currentImg = this.ImageData[this.currentIndex].filepath;
       this.time = this.ImageData[this.currentIndex].producttime;
     },
     change(type) {

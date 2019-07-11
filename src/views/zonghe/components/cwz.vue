@@ -56,11 +56,13 @@ export default {
     },
     methods:{
        getData() {
+        this.loading = this.$loading();
          this.$Axios
             .get('http://192.168.118.226:9831/webapi/api/v1/service/center/get/data?key=28911461-a072-429e-bf27-5116c78d6f30&guid=28911461-a072-429e-bf27-5116c78d6f30&')
             .then(d => {
                 console.log(d)
                 this.testData = d.data.data.data
+                this.loading.close()
             })
        }
     }

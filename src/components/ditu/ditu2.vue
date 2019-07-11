@@ -16,6 +16,11 @@
     <div class="table">
       <div class="search" ref="search">
         <div class="table_title">{{label}}</div>
+        <div class="content">
+          <!-- <span>搜索</span> -->
+          <el-input v-model="search" size="mini" placeholder="输入关键字搜索"/>
+          <el-button type="primary" size="mini" @click="searchTable">搜索</el-button>
+        </div>
       </div>
       <div class="show" ref="show">
         <div class="columns">
@@ -103,6 +108,7 @@ Vue.use(Button);
 Vue.use(Radio);
 Vue.use(Row);
 Vue.use(Col);
+let layer;
 export default {
   name: "mainPage",
   components: {},
@@ -110,28 +116,7 @@ export default {
     columns: {
       type: Array,
       default: () => {
-        return [
-          {
-            label: "序号",
-            field: "rowid",
-            style: { textAlign: "center", width: "40px" }
-          },
-          {
-            label: "地址",
-            field: "address",
-            style: { textAlign: "center", width: "120px" }
-          },
-          {
-            label: "物资点",
-            field: "stnm",
-            style: { textAlign: "center", width: "100px" }
-          },
-          {
-            label: "物资类型",
-            field: "type_name",
-            style: { textAlign: "center", width: "80px" }
-          }
-        ];
+        return [];
       }
     },
     testData: {
@@ -190,7 +175,9 @@ export default {
       tableHeight: {
         height: ""
       },
-      timer: null
+      timer: null,
+      searchContent: [],
+      search: ''
     };
   },
   computed: {},
@@ -207,16 +194,18 @@ export default {
     }
   },
   watch: {
-    testData: function() {
+    testData: function(val) {
+      this.searchContent = val
       this.init();
     }
   },
   mounted() {
     this.getData();
     this.tableHeight.height =
-      this.winH - this.$refs.search.offsetHeight - 45 + "px";
+      this.winH - 141 + "px";
     // this.$store.commit('increment')
     // console.log(this.$store.state.count)
+    this.searchContent = this.testData
   },
   methods: {
     getData() {
@@ -249,8 +238,8 @@ export default {
         });
     },
     init(map) {
-      let layer = this.map.layer();
-      let data = this.testData;
+      layer = this.map.layer();
+      let data = this.searchContent;
       // layer.addPoints(data,data => {
       //     return{
       //         feature: {
@@ -263,15 +252,15 @@ export default {
       //         }
       //             }
       // })
-      layer.addRivers(data,
-        {
-          feature: {
-            ratio: 180,
-            minWidth: 10, // px
-            maxWidth: 40, // px
-            minZoom: 6
-          }
-        });
+      // layer.addRivers(data,
+      //   {
+      //     feature: {
+      //       ratio: 180,
+      //       minWidth: 10, // px
+      //       maxWidth: 40, // px
+      //       minZoom: 6
+      //     }
+      //   });
     },
     showPoint(row) {
       this.timer && clearTimeout(this.timer);
@@ -301,11 +290,25 @@ export default {
     showPoint1(row) {
       this.timer && clearTimeout(this.timer);
       this.timer = setTimeout(() => {
-        this.map.setView([row.lon, row.lat], 10);
+        // this.map.setView([row.lon, row.lat], 10);
+        let data = row.coordinates
+
+            
+        console.log(data);
+        // data[0]
+        // layer.addRivers(row, {
+        //   // ratio: 180,
+        //   minWidth: 1, // px
+        //   maxWidth: 4, // px
+        //   minZoom: 6
+        // });
       }, 300);
     },
     change() {
       this.map.fullScreen();
+    },
+    searchTable() {
+       this.searchContent = this.testData.filter(data => !this.search || data.ennm.toLowerCase().includes(this.search.toLowerCase()))
     }
   }
 };
@@ -361,8 +364,15 @@ export default {
     flex-direction: column;
     overflow: auto;
     .search {
+      display: flex;
+      background-color: #f3f6f9;
+      align-items:center;
+      justify-content:space-between;
+      padding-right:20px;
+      .content {
+        display: flex;
+      }
       .table_title {
-        background-color: #f3f6f9;
         height: 40px;
         line-height: 40px;
         padding-left: 10px;
